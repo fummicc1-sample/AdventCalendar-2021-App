@@ -1,7 +1,7 @@
 import SwiftUI
 
-public struct Event: Codable {
-    var id: Int
+public struct Event: Codable, Identifiable {
+    public var id: Int
     let name: String
     let startAt: Date
     let endAt: Date?
