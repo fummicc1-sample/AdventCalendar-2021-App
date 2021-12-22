@@ -1,6 +1,7 @@
 import SwiftUI
 
 public struct Event: Codable {
+    var id: Int
     let name: String
     let startAt: Date
     let endAt: Date?
