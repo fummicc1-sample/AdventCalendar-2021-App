@@ -16,6 +16,8 @@ public actor Store: ObservableObject {
     @MainActor @Published public var teams: [Team] = []
     @MainActor @Published public var events: [Event] = []
     @MainActor @Published public var me: Member?
+    @MainActor @Published public var myTeams: [Team] = []
+    @MainActor @Published public var myEvents: [Event] = []
     
     private let database: UserDefaults
     
@@ -23,7 +25,7 @@ public actor Store: ObservableObject {
         self.database = database
     }
     
-    public func fetch() {
+    private func fetch() {
         Task { @MainActor in
             members = await fetchMembers()
             teams = await fetchTeams()
@@ -95,8 +97,9 @@ extension Store: Database {
             let members: [Member] = await MainActor.run {
                 self.members.remove(at: index)
                 return self.members
-            } 
+            }
             save(key: "members", value: members)
+            await refresh()
         }
     }
     
@@ -107,6 +110,7 @@ extension Store: Database {
                 return self.teams
             }
             save(key: "teams", value: teams)
+            await refresh()
         }
     }
     
@@ -117,6 +121,7 @@ extension Store: Database {
                 return self.events
             }
             save(key: "events", value: events)
+            await refresh()
         }
     }
     
@@ -130,6 +135,7 @@ extension Store: Database {
             all.append(member)
         }
         save(key: "members", value: all)
+        await refresh()
     }
     
     public func persist(team: Team) async {
@@ -142,6 +148,7 @@ extension Store: Database {
             all.append(team)
         }
         save(key: "teams", value: all)
+        await refresh()
     }
     
     public func persist(event: Event) async {
@@ -154,14 +161,12 @@ extension Store: Database {
             all.append(event)
         }
         save(key: "events", value: all)
+        await refresh()
     }
     
     public func persist(me: Int) async {
         saveSingular(key: "me", value: me)
-        let new = await fetchMe()
-        await MainActor.run { 
-            self.me = new
-        }
+        await refresh()
     }
     
     public func refresh() async {

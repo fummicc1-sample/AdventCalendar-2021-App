@@ -6,6 +6,7 @@ struct MemberView: View {
     let isLeader: Bool
     let member: Member
     let didTap: (Member) -> Void
+    var length: Double = 32
     
     @State private var iconScale: Double = 1
     @State private var iconOpacity: Double = 0
@@ -16,7 +17,7 @@ struct MemberView: View {
                 image
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 32, height: 32)
+                    .frame(width: length, height: length)
                     .clipShape(Circle())
                     .scaleEffect(iconScale)
                     .opacity(iconOpacity)

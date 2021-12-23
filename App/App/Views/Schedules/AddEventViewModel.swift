@@ -32,6 +32,10 @@ class AddEventViewModel: ObservableObject {
 
     func save() async {
 
+        if !validateState() {
+            return
+        }
+
         let members: [Member] = isInterested ? [me] : []
         let repeatType: Event.Repeat? = isRepeat ? .everyWeek : nil
 
