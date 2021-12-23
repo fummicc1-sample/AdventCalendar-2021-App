@@ -32,7 +32,8 @@ public actor Store: ObservableObject {
             events = await fetchEvents()
             // NOTE: this must be called after `members` are updated.
             me = await fetchMe()
-            print("me", me as Any)
+            myTeams = await fetchMyTeams()
+            myEvents = await fetchMyEvents()
         }
     }
     
@@ -47,7 +48,27 @@ public actor Store: ObservableObject {
         }
         return nil
     }
-    
+
+    private func fetchMyTeams() async -> [Team] {
+        guard let me = await self.me else {
+            return []
+        }
+        let teams = await self.teams
+        return teams.filter({
+            $0.members.contains(where: { member in me.id == member.id })
+        })
+    }
+
+    private func fetchMyEvents() async -> [Event] {
+        guard let me = await self.me else {
+            return []
+        }
+        let events = await self.events
+        return events.filter({
+            $0.interested.contains(where: { member in member.id == me.id })
+        })
+    }
+
     private func fetchMembers() -> [Member] {
         let decoder = Constants.decoder
         guard let raw = database.string(forKey: "members"),

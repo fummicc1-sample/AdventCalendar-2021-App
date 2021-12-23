@@ -14,7 +14,11 @@ struct RootView: View {
                         .tabItem { Label("カレンダー", systemImage: "calendar") }.tag(1)
                     TeamsView()
                         .tabItem { Label("班", systemImage: "rectangle.3.group") }.tag(2)
-                    ProfileView(member: me, teams: <#T##[Team]#>)
+                    ProfileView(
+                        member: me,
+                        teams: store.myTeams,
+                        interestedEvents: store.myEvents
+                    )
                         .tabItem { Label("プロフィール", systemImage: "person.circle") }.tag(3)
                 }
             } else {
