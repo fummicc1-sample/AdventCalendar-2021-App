@@ -4,8 +4,8 @@ struct CalendarView: View {
     
     let year: Int
     @State private var selectedDate: Date? = nil
-    @State private var events: [Event] = []
     @State private var data: [Date] = []
+    @EnvironmentObject var store: Store
     
     init(year: Int) {
         self.year = year
@@ -35,9 +35,9 @@ struct CalendarView: View {
                 let dayOfWeek = DayOfWeek(date: date)!
                 let calendar = Calendar(identifier: .gregorian)
                 let day = calendar.component(.day, from: date)
-                let dayEvents = events.filter { event in
+                let dayEvents = store.events.filter { event in
                     calendar.isDate(date, inSameDayAs: event.startAt)
-                } 
+                }
                 let isToday = calendar.isDateInToday(date)
                 DayCell(
                     title: dayOfWeek.rawValue,
