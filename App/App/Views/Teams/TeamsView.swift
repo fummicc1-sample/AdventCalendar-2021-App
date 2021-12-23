@@ -89,7 +89,7 @@ struct TeamCard: View {
                 }.frame(height: 48)
             }.padding()
         }
-        .frame(width: 200, height: 200)
+        .frame(width: 160, height: 160)
         .clipShape(Circle())
         .onTapGesture {
             didTap(team)

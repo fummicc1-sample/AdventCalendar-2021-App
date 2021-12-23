@@ -2,13 +2,8 @@ import SwiftUI
 import Core
 
 struct AddEventView: View {
-    
-    @State private var name: String = ""
-    @State private var startAt: Date = Date()
-    @State private var endAt: Date = Date().addingTimeInterval(24 * 60 * 60)
-    @State private var isInterested: Bool = false
-    @State private var isRepeat: Bool = false
-    @EnvironmentObject var store: Store
+
+    @ObservedObject var viewModel: AddEventViewModel
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -17,47 +12,36 @@ struct AddEventView: View {
                 List {
                     ListItemView(
                         title: "イベント名",
-                        content: TextField("入力", text: $name)
+                        content: TextField("入力", text: $viewModel.name)
                     ).padding()
                     ListItemView(
                         title: "開始時刻",
-                        content: DatePicker("選択", selection: $startAt) 
+                        content: DatePicker("選択", selection: $viewModel.startAt)
                     )
                     ListItemView(
                         title: "終了時刻",
-                        content: DatePicker("選択", selection: $endAt) 
+                        content: DatePicker("選択", selection: $viewModel.endAt)
                     )
                     ListItemView(
                         title: "イベントに参加",
-                        content: Toggle("", isOn: $isInterested)
+                        content: Toggle("", isOn: $viewModel.isInterested)
                     )
                     ListItemView(
                         title: "繰り返し", 
-                        content: Toggle("", isOn: $isRepeat)
+                        content: Toggle("", isOn: $viewModel.isRepeat)
                     )
                 }
             }
             .navigationTitle("新しいイベントの作成")
-            .toolbar { 
-                let me = store.me!
-                let members: [Member] = isInterested ? [me] : []
-                let repeatType: Event.Repeat? = isRepeat ? .everyWeek : nil
-                Button("決定") {
-                    let event = Event(
-                        id: -1,
-                        name: name,
-                        startAt: startAt,
-                        endAt: endAt,
-                        interested: members, 
-                        repeatType: repeatType
-                    )
+            .toolbar {
+                Button {
                     Task {
-                        await store.persist(event: event)
-                        await MainActor.run {
-                            dismiss()
-                        }
+                        await viewModel.save()
                     }
+                } label: {
+                    Text("決定").bold()
                 }
+
             }
         }
     }

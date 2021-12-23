@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D328AF3627747EFA00FE132F /* AddEventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D328AF3527747EFA00FE132F /* AddEventViewModel.swift */; };
 		D3326A1D27742A290088558C /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3326A1C27742A290088558C /* App.swift */; };
 		D3326A1F27742A290088558C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3326A1E27742A290088558C /* ContentView.swift */; };
 		D3326A2127742A2A0088558C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3326A2027742A2A0088558C /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D328AF3527747EFA00FE132F /* AddEventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventViewModel.swift; sourceTree = "<group>"; };
 		D3326A1927742A290088558C /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3326A1C27742A290088558C /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		D3326A1E27742A290088558C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				D3326A2D27742A530088558C /* AddEventView.swift */,
+				D328AF3527747EFA00FE132F /* AddEventViewModel.swift */,
 				D3326A2E27742A530088558C /* CalendarView.swift */,
 			);
 			path = Schedules;
@@ -236,6 +239,7 @@
 				D3A0257B2774318B004D6704 /* RootView.swift in Sources */,
 				D3A0257C2774318B004D6704 /* AddEventView.swift in Sources */,
 				D3A0257D2774318B004D6704 /* CalendarView.swift in Sources */,
+				D328AF3627747EFA00FE132F /* AddEventViewModel.swift in Sources */,
 				D3A0258A27743517004D6704 /* ListItemView.swift in Sources */,
 				D3A0257E2774318B004D6704 /* SelectMemberView.swift in Sources */,
 				D3A0257F2774318B004D6704 /* TeamsView.swift in Sources */,

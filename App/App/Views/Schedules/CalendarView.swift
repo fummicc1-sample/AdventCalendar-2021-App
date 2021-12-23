@@ -31,52 +31,55 @@ struct CalendarView: View {
     
     var body: some View {
         NavigationView {
-            Group {
-                if data.isEmpty {
-                    Text("No Dates")
-                } else {
-                    ZStack {
-                        List(data) { date in
-                            let dayOfWeek = DayOfWeek(date: date)!
-                            let calendar = Calendar(identifier: .gregorian)
-                            let day = calendar.component(.day, from: date)
-                            let month = calendar.component(.month, from: date)
-                            let dayEvents = store.events.filter { event in
-                                calendar.isDate(date, inSameDayAs: event.startAt)
-                            }
-                            let isToday = calendar.isDateInToday(date)
-                            if dayEvents.isEmpty {
-                                EmptyView()
-                            } else {
-                                DayCell(
-                                    title: dayOfWeek.rawValue,
-                                    dayOfWeek: dayOfWeek,
-                                    day: day,
-                                    month: month,
-                                    events: dayEvents,
-                                    isToday: isToday
-                                ) { event in
-                                    selectedDate = event.startAt
-                                }
-                            }
+            ZStack(alignment: Alignment.bottomTrailing) {
+                List(data) { date in
+                    let dayOfWeek = DayOfWeek(date: date)!
+                    let calendar = Calendar(identifier: .gregorian)
+                    let day = calendar.component(.day, from: date)
+                    let month = calendar.component(.month, from: date)
+                    let dayEvents = store.events.filter { event in
+                        calendar.isDate(date, inSameDayAs: event.startAt)
+                    }
+                    let isToday = calendar.isDateInToday(date)
+                    if dayEvents.isEmpty {
+                        EmptyView()
+                    } else {
+                        DayCell(
+                            title: dayOfWeek.rawValue,
+                            dayOfWeek: dayOfWeek,
+                            day: day,
+                            month: month,
+                            events: dayEvents,
+                            isToday: isToday
+                        ) { event in
+                            selectedDate = event.startAt
                         }
                     }
-                    .sheet(isPresented: $showAddEventPage) {
-                        showAddEventPage = false
-                    } content: {
-                        AddEventView()
-                    }
-
                 }
-            }
-            .toolbar {
                 Button {
                     showAddEventPage = true
                 } label: {
                     Image(systemName: "plus")
+                        .resizable()
+                        .padding()
+                }
+                .foregroundColor(Color.white)
+                .background(Color.accentColor)
+                .frame(width: 56, height: 56, alignment: .bottomTrailing)
+                .clipShape(Circle())
+                .alignmentGuide(VerticalAlignment.bottom, computeValue: { d in
+                    80
+                })
+                .alignmentGuide(HorizontalAlignment.trailing) { d in
+                    80
                 }
             }
-            .navigationTitle(String(year))
+            .sheet(isPresented: $showAddEventPage) {
+                showAddEventPage = false
+            } content: {
+                AddEventView(viewModel: AddEventViewModel(store: store))
+            }.navigationTitle(String(year))
+
         }
     }
 }
