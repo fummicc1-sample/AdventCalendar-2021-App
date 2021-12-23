@@ -4,7 +4,7 @@ import Core
 
 @MainActor
 class AddEventViewModel: ObservableObject {
-    private let store: Store
+    private let store: Database
 
     @Published var name: String = ""
     @Published var startAt: Date = Date()
