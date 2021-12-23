@@ -5,10 +5,12 @@ struct EventDetailView: View {
 
     let event: Event
 
-    
+    @ObservedObject var viewModel: EventDetailViewModel
     @EnvironmentObject var store: Store
 
     var body: some View {
-        Text("Hello, World!")
+        VStack {
+        }
+        .navigationTitle(event.name)
     }
 }

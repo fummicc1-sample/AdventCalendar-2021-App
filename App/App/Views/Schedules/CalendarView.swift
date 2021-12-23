@@ -7,6 +7,7 @@ struct CalendarView: View {
     @State private var selectedDate: Date? = nil
     @State private var data: [Date] = []
     @State private var showAddEventPage: Bool = false
+    @State private var showEventDetail: Event?
     @EnvironmentObject var store: Store
     
     init(year: Int) {
@@ -32,6 +33,17 @@ struct CalendarView: View {
     var body: some View {
         NavigationView {
             ZStack(alignment: Alignment.bottomTrailing) {
+
+                if let showEventDetail = showEventDetail {
+                    EventDetailView(
+                        event: showEventDetail,
+                        viewModel: EventDetailViewModel(
+                            database: store
+                        )
+                    )
+                        .navigatePush(whenTrue: .constant(true))
+                }
+
                 List(data) { date in
                     let dayOfWeek = DayOfWeek(date: date)!
                     let calendar = Calendar(identifier: .gregorian)
@@ -53,6 +65,7 @@ struct CalendarView: View {
                             isToday: isToday
                         ) { event in
                             selectedDate = event.startAt
+                            showEventDetail = event
                         }
                     }
                 }
