@@ -153,7 +153,7 @@ extension Store: Database {
             event.id = all.endIndex + 1
             all.append(event)
         }
-        save(key: "members", value: all)
+        save(key: "events", value: all)
     }
     
     public func persist(me: Int) async {

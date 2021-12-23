@@ -26,7 +26,6 @@ struct RootView: View {
             }
         }
         .task {
-            print("Task")
             await store.refresh()
         }
     }
