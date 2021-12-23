@@ -11,7 +11,16 @@ public protocol Database {
     func delete(event: Int) async
 }
 
-public actor Store: ObservableObject {
+public protocol DataStore: ObservableObject {
+    @MainActor var members: [Member] { get }
+    @MainActor var teams: [Team] { get }
+    @MainActor var events: [Event] { get }
+    @MainActor var me: Member? { get }
+    @MainActor var myTeams: [Team] { get }
+    @MainActor var myEvents: [Event] { get }
+}
+
+public actor Store {
     @MainActor @Published public var members: [Member] = []
     @MainActor @Published public var teams: [Team] = []
     @MainActor @Published public var events: [Event] = []
@@ -112,7 +121,7 @@ public actor Store: ObservableObject {
     }
 }
 
-extension Store: Database {
+extension Store: Database, DataStore {
     public func delete(member: Int) async {
         if let index = await members.firstIndex(where: { $0.id == member }) {
             let members: [Member] = await MainActor.run {

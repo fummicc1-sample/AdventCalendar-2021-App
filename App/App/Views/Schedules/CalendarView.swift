@@ -36,9 +36,9 @@ struct CalendarView: View {
 
                 if let showEventDetail = showEventDetail {
                     EventDetailView(
-                        event: showEventDetail,
                         viewModel: EventDetailViewModel(
-                            database: store
+                            database: store,
+                            event: showEventDetail
                         )
                     )
                         .navigatePush(whenTrue: .constant(true))
