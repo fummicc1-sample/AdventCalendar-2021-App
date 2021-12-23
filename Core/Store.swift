@@ -83,6 +83,10 @@ public actor Store: ObservableObject {
         let text = String(data: data, encoding: .utf8)
         database.set(text, forKey: key)
     }
+
+    private func saveSingular(key: String, value: Any) {
+        database.set(value, forKey: key)
+    }
 }
 
 extension Store: Database {
@@ -153,7 +157,7 @@ extension Store: Database {
     }
     
     public func persist(me: Int) async {
-        save(key: "me", value: me)
+        saveSingular(key: "me", value: me)
         let new = await fetchMe()
         await MainActor.run { 
             self.me = new
