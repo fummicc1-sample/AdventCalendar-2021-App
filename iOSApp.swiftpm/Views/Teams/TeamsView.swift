@@ -7,37 +7,42 @@ struct TeamsView: View {
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(store.teams) { team in
-                    HStack {
-                        Spacer()
-                        TeamCard(
-                            didTap: { team in 
-                                selectedTeam = team
-                                print("selectedTeam", selectedTeam as Any)
-                            },
-                            team: team
-                        )
-                        Spacer()
-                    }.padding()
-                }
-                .listRowSeparator(.hidden)
-                
-                NavigationLink(isActive: Binding(
-                    get: {
-                        return selectedTeam != nil
-                    }, set: { isSelected in
-                        if !isSelected {
-                            selectedTeam = nil 
-                        }
-                    }
-                )) {
+            VStack {
+                if let selectedTeam = selectedTeam {
                     TeamDetailView(team: selectedTeam)
-                } label: { 
-                    EmptyView()
+                        .navigatePush(
+                            when: Binding(
+                                get: {
+                                    selectedTeam.id
+                                },
+                                set: { id in
+                                    if id == selectedTeam.id {
+                                        self.selectedTeam = nil
+                                    }
+                                }
+                            ),
+                            matches: selectedTeam.id
+                        )
+                } else {
+                    
+                    List {
+                        ForEach(store.teams) { team in
+                            HStack {
+                                Spacer()
+                                TeamCard(
+                                    didTap: { team in 
+                                        selectedTeam = team
+                                    },
+                                    team: team
+                                )
+                                Spacer()
+                            }.padding()
+                        }
+                        .listRowSeparator(.hidden)
+                    }
+                    .listStyle(PlainListStyle())
                 }
             }
-            .listStyle(PlainListStyle())
             .padding()
             .navigationBarTitle("班を選択")
         }.navigationViewStyle(StackNavigationViewStyle.stack)

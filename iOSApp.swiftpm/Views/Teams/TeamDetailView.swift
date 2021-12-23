@@ -1,13 +1,10 @@
 import SwiftUI
 
 struct TeamDetailView: View {
-    let team: Team?
+    let team: Team
     
     var body: some View {
-        guard let team = team else {
-            return EmptyView()
-        }
-        return NavigationView {
+        NavigationView {
             List {
                 HStack {
                     Text("メンバーリスト")
