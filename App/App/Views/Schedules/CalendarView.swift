@@ -159,27 +159,11 @@ extension CalendarView {
                 .background(isToday ? Color.accentColor : Color.clear)
                 .clipShape(Circle())
                 Spacer().frame(width: 16)
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack {
-                        ForEach(events) { event in
-                            VStack {
-                                Spacer().frame(height: 4)
-                                Text(event.name).bold().font(.title3)
-                                Text(event.startAt, style: .time).bold().font(.title3)
-                                if let endAt = event.endAt {
-                                    Image(systemName: "arrow.down")
-                                    Text(endAt, style: .time).bold().font(.title3)
-                                }
-                            }
-                            .padding()
-                            .onTapGesture {
-                                didTapEvent(event)
-                            }
-                            .background(dayOfWeek.color)
-                            .cornerRadius(16)
-                        }
-                    }
-                }
+                EventListView(
+                    events: events,
+                    didTapEvent: didTapEvent,
+                    backgroundColor: dayOfWeek.color
+                )
             }
         }
     }

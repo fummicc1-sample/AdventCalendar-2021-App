@@ -9,15 +9,19 @@ struct SelectMemberView: View {
         NavigationView { 
             List {
                 ForEach(store.members) { member in
-                    MemberView(
-                        isLeader: false,
-                        member: member,
-                        didTap: { member in
-                            Task {
-                                await store.persist(me: member.id)
-                            }
+                    HStack {
+                        MemberView(
+                            isLeader: false,
+                            member: member,
+                            didTap: { _ in }
+                        )
+                        Text(member.displayName).font(.body)
+                    }
+                    .onTapGesture {
+                        Task {
+                            await store.persist(me: member.id)
                         }
-                    )
+                    }
                 }
             }
             .navigationTitle("アカウントを選択")

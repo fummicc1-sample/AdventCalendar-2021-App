@@ -12,7 +12,7 @@ struct RootView: View {
                 TabView(selection: $selectedTag) {
                     CalendarView(year: 2021)
                         .tabItem { Label("カレンダー", systemImage: "calendar") }.tag(1)
-                    TeamsView()
+                    TeamsView(showNavigation: true)
                         .tabItem { Label("班", systemImage: "rectangle.3.group") }.tag(2)
                     ProfileView(
                         member: me,

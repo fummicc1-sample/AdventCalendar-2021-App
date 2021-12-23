@@ -5,54 +5,64 @@ struct TeamsView: View {
     @EnvironmentObject var store: Store
     
     @State private var selectedTeam: Team?
+
+    var showNavigation: Bool = false
+    var iconSize: Double = 160
     
     var body: some View {
-        NavigationView {
-            VStack {
-                if let selectedTeam = selectedTeam {
-                    TeamDetailView(team: selectedTeam)
-                        .navigatePush(
-                            when: Binding(
-                                get: {
-                                    selectedTeam.id
-                                },
-                                set: { id in
-                                    if id == selectedTeam.id {
-                                        self.selectedTeam = nil
-                                    }
+        if showNavigation {
+            NavigationView {
+                content()
+                .padding()
+                .navigationBarTitle("班を選択")
+            }.navigationViewStyle(StackNavigationViewStyle.stack)
+        } else {
+            content()
+                .padding()
+        }
+    }
+
+    private func content() -> some View {
+        VStack {
+            if let selectedTeam = selectedTeam {
+                TeamDetailView(team: selectedTeam)
+                    .navigatePush(
+                        when: Binding(
+                            get: {
+                                selectedTeam.id
+                            },
+                            set: { id in
+                                if id == selectedTeam.id {
+                                    self.selectedTeam = nil
                                 }
-                            ),
-                            matches: selectedTeam.id
-                        )
-                } else {
-                    
-                    List {
-                        ForEach(store.teams) { team in
-                            HStack {
-                                Spacer()
-                                TeamCard(
-                                    didTap: { team in 
-                                        selectedTeam = team
-                                    },
-                                    team: team
-                                )
-                                Spacer()
-                            }.padding()
-                        }
-                        .listRowSeparator(.hidden)
+                            }
+                        ),
+                        matches: selectedTeam.id
+                    )
+            } else {
+                ScrollView(.vertical, showsIndicators: false) {
+                    ForEach(store.teams) { team in
+                        TeamCard(
+                            didTap: { team in
+                                selectedTeam = team
+                            },
+                            team: team,
+                            iconSize: iconSize
+                        ).padding()
                     }
-                    .listStyle(PlainListStyle())
+                    .listRowSeparator(.hidden)
                 }
+                .listStyle(PlainListStyle())
             }
-            .padding()
-            .navigationBarTitle("班を選択")
-        }.navigationViewStyle(StackNavigationViewStyle.stack)
+        }
+        .padding()
     }
 }
 
 struct TeamCard: View {
     let didTap: (Team) -> Void
     let team: Team
+    let iconSize: Double
     
     var body: some View {
         ZStack {
@@ -89,7 +99,7 @@ struct TeamCard: View {
                 }.frame(height: 48)
             }.padding()
         }
-        .frame(width: 160, height: 160)
+        .frame(width: iconSize, height: iconSize)
         .clipShape(Circle())
         .onTapGesture {
             didTap(team)
