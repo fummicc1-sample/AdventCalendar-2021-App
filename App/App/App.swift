@@ -1,10 +1,11 @@
 import SwiftUI
+import Core
 
 @main
 struct MyApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView().environmentObject(Store())
         }
     }
 }

@@ -1,4 +1,5 @@
 import SwiftUI
+import Core
 
 struct TeamsView: View {
     @EnvironmentObject var store: Store

@@ -1,6 +1,13 @@
 import SwiftUI
 
 public struct Team: Codable, Identifiable {
+    public init(id: Int, members: [Member], leader: Member, name: String) {
+        self.id = id
+        self.members = members
+        self.leader = leader
+        self.name = name
+    }
+
     public var id: Int
     public let members: [Member]
     public let leader: Member
@@ -8,7 +15,7 @@ public struct Team: Codable, Identifiable {
 }
 
 public extension Team {
-    public var imageName: String? {
+    var imageName: String? {
         switch name {
             case "Game班":
             return "Icon-game"

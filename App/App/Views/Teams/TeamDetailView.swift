@@ -1,4 +1,5 @@
 import SwiftUI
+import Core
 
 struct TeamDetailView: View {
     let team: Team

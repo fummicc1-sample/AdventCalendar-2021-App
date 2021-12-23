@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Core",
+        "repositoryURL": "https://github.com/fummicc1-sample/AdventCalendar-2021-App/",
+        "state": {
+          "branch": "main",
+          "revision": "3b3b17bdd90615369e1b58654e62d6082f626de3",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
