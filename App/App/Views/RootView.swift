@@ -8,9 +8,7 @@ struct RootView: View {
     
     var body: some View {
         Group {
-            if store.me == nil {
-                SelectMemberView()
-            } else {
+            if let me = store.me {
                 TabView(selection: $selectedTag) {
                     Group {
                         CalendarView(year: 2021)
@@ -18,7 +16,13 @@ struct RootView: View {
                     Group {
                         TeamsView()
                     }.tabItem { Label("班", systemImage: "rectangle.3.group") }.tag(2)
+                    Group {
+                        ProfileView(member: me)
+                            .tabItem { Label("プロフィール", systemImage: "person.circle") }.tag(3)
+                    }
                 }
+            } else {
+                SelectMemberView()
             }
         }
         .task {

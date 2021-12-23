@@ -30,40 +30,53 @@ struct CalendarView: View {
     }
     
     var body: some View {
-        if data.isEmpty { 
-            Text("No Dates") 
-        } else {
-            ZStack {
-                List(data) { date in
-                    let dayOfWeek = DayOfWeek(date: date)!
-                    let calendar = Calendar(identifier: .gregorian)
-                    let day = calendar.component(.day, from: date)
-                    let dayEvents = store.events.filter { event in
-                        calendar.isDate(date, inSameDayAs: event.startAt)
+        NavigationView {
+            Group {
+                if data.isEmpty {
+                    Text("No Dates")
+                } else {
+                    ZStack {
+                        List(data) { date in
+                            let dayOfWeek = DayOfWeek(date: date)!
+                            let calendar = Calendar(identifier: .gregorian)
+                            let day = calendar.component(.day, from: date)
+                            let month = calendar.component(.month, from: date)
+                            let dayEvents = store.events.filter { event in
+                                calendar.isDate(date, inSameDayAs: event.startAt)
+                            }
+                            let isToday = calendar.isDateInToday(date)
+                            if dayEvents.isEmpty {
+                                EmptyView()
+                            } else {
+                                DayCell(
+                                    title: dayOfWeek.rawValue,
+                                    dayOfWeek: dayOfWeek,
+                                    day: day,
+                                    month: month,
+                                    events: dayEvents,
+                                    isToday: isToday
+                                ) { event in
+                                    selectedDate = event.startAt
+                                }
+                            }
+                        }
                     }
-                    let isToday = calendar.isDateInToday(date)
-                    DayCell(
-                        title: dayOfWeek.rawValue,
-                        dayOfWeek: dayOfWeek,
-                        day: day,
-                        events: dayEvents,
-                        isToday: isToday
-                    ) { event in
-                        selectedDate = event.startAt
+                    .sheet(isPresented: $showAddEventPage) {
+                        showAddEventPage = false
+                    } content: {
+                        AddEventView()
                     }
+
                 }
-                Button { 
+            }
+            .toolbar {
+                Button {
                     showAddEventPage = true
-                } label: { 
+                } label: {
                     Image(systemName: "plus")
                 }
             }
-            .sheet(isPresented: $showAddEventPage) { 
-                showAddEventPage = false
-            } content: { 
-                
-            }
-            
+            .navigationTitle(String(year))
         }
     }
 }
@@ -112,7 +125,7 @@ enum DayOfWeek: String {
             self = .thursday
         case 6:
             self = .friday
-        case 7:   
+        case 7:
             self = .saturday
         default:
             return nil
@@ -126,6 +139,7 @@ extension CalendarView {
         let title: String
         let dayOfWeek: DayOfWeek
         let day: Int
+        let month: Int
         let events: [Event]
         let isToday: Bool
         let didTapEvent: (Event) -> Void
@@ -133,25 +147,35 @@ extension CalendarView {
         var body: some View {
             HStack {
                 VStack(spacing: 0) {
-                    Text(title).bold()
-                    Text("\(day)")
+                    Text("\(month)/\(day)")
                         .bold()
                         .font(.title3)
-                        .padding(4)
-                        .background(isToday ? Color.accentColor : Color.clear)
-                        .clipShape(Circle())
+                    Text(title).bold()
                 }
+                .padding(8)
+                .background(isToday ? Color.accentColor : Color.clear)
+                .clipShape(Circle())
                 Spacer().frame(width: 16)
-                ForEach(events) { event in
-                    ZStack {
-                        Spacer().frame(height: 4)
-                        Text(event.name).bold().font(.title3)
-                        Text(event.startAt, style: .time).bold().font(.title3)
-                    }.onTapGesture {
-                        didTapEvent(event)
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        ForEach(events) { event in
+                            VStack {
+                                Spacer().frame(height: 4)
+                                Text(event.name).bold().font(.title3)
+                                Text(event.startAt, style: .time).bold().font(.title3)
+                                if let endAt = event.endAt {
+                                    Image(systemName: "arrow.down")
+                                    Text(endAt, style: .time).bold().font(.title3)
+                                }
+                            }
+                            .padding()
+                            .onTapGesture {
+                                didTapEvent(event)
+                            }
+                            .background(dayOfWeek.color)
+                            .cornerRadius(16)
+                        }
                     }
-                    .background(dayOfWeek.color)
-                    .frame(height: 64)
                 }
             }
         }

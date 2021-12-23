@@ -20,6 +20,8 @@
 		D3A025812774318B004D6704 /* MemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3326A3427742A530088558C /* MemberView.swift */; };
 		D3A025822774318B004D6704 /* RootModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3326A3527742A530088558C /* RootModel.swift */; };
 		D3A0258427743198004D6704 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = D3A0258327743198004D6704 /* Core */; };
+		D3A02587277434AE004D6704 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A02586277434AE004D6704 /* ProfileView.swift */; };
+		D3A0258A27743517004D6704 /* ListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0258927743517004D6704 /* ListItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,8 @@
 		D3326A3427742A530088558C /* MemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberView.swift; sourceTree = "<group>"; };
 		D3326A3527742A530088558C /* RootModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootModel.swift; sourceTree = "<group>"; };
 		D3326A3827742B570088558C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D3A02586277434AE004D6704 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		D3A0258927743517004D6704 /* ListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,11 +96,13 @@
 		D3326A2A27742A530088558C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D3326A3527742A530088558C /* RootModel.swift */,
 				D3326A2B27742A530088558C /* RootView.swift */,
+				D3A025882774350C004D6704 /* Components */,
+				D3A02585277434A3004D6704 /* Profile */,
 				D3326A2C27742A530088558C /* Schedules */,
 				D3326A2F27742A530088558C /* SelectMember */,
 				D3326A3127742A530088558C /* Teams */,
-				D3326A3527742A530088558C /* RootModel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -133,6 +139,22 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D3A02585277434A3004D6704 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				D3A02586277434AE004D6704 /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		D3A025882774350C004D6704 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				D3A0258927743517004D6704 /* ListItemView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,11 +236,13 @@
 				D3A0257B2774318B004D6704 /* RootView.swift in Sources */,
 				D3A0257C2774318B004D6704 /* AddEventView.swift in Sources */,
 				D3A0257D2774318B004D6704 /* CalendarView.swift in Sources */,
+				D3A0258A27743517004D6704 /* ListItemView.swift in Sources */,
 				D3A0257E2774318B004D6704 /* SelectMemberView.swift in Sources */,
 				D3A0257F2774318B004D6704 /* TeamsView.swift in Sources */,
 				D3A025802774318B004D6704 /* TeamDetailView.swift in Sources */,
 				D3A025812774318B004D6704 /* MemberView.swift in Sources */,
 				D3A025822774318B004D6704 /* RootModel.swift in Sources */,
+				D3A02587277434AE004D6704 /* ProfileView.swift in Sources */,
 				D3326A1F27742A290088558C /* ContentView.swift in Sources */,
 				D3326A1D27742A290088558C /* App.swift in Sources */,
 			);

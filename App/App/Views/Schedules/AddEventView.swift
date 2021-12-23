@@ -9,30 +9,31 @@ struct AddEventView: View {
     @State private var isInterested: Bool = false
     @State private var isRepeat: Bool = false
     @EnvironmentObject var store: Store
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         NavigationView { 
             ZStack {
                 List {
-                    listItem(
+                    ListItemView(
                         title: "イベント名",
-                        view: TextField("入力", text: $name)
+                        content: TextField("入力", text: $name)
                     ).padding()
-                    listItem(
+                    ListItemView(
                         title: "開始時刻",
-                        view: DatePicker("選択", selection: $startAt) 
+                        content: DatePicker("選択", selection: $startAt) 
                     )
-                    listItem(
+                    ListItemView(
                         title: "終了時刻",
-                        view: DatePicker("選択", selection: $endAt) 
+                        content: DatePicker("選択", selection: $endAt) 
                     )
-                    listItem(
+                    ListItemView(
                         title: "イベントに参加",
-                        view: Toggle("参加予定", isOn: $isInterested)
+                        content: Toggle("", isOn: $isInterested)
                     )
-                    listItem(
+                    ListItemView(
                         title: "繰り返し", 
-                        view: Toggle("繰り返す", isOn: $isRepeat)
+                        content: Toggle("", isOn: $isRepeat)
                     )
                 }
             }
@@ -41,7 +42,7 @@ struct AddEventView: View {
                 let me = store.me!
                 let members: [Member] = isInterested ? [me] : []
                 let repeatType: Event.Repeat? = isRepeat ? .everyWeek : nil
-                Button("決定") { 
+                Button("決定") {
                     let event = Event(
                         id: -1,
                         name: name,
@@ -50,16 +51,14 @@ struct AddEventView: View {
                         interested: members, 
                         repeatType: repeatType
                     )
+                    Task {
+                        await store.persist(event: event)
+                        await MainActor.run {
+                            dismiss()
+                        }
+                    }
                 }
             }
-        }
-    }
-    
-    func listItem<Content: View>(title: String, view: Content) -> some View {
-        HStack {
-            Text(title)
-            Spacer()
-            view
         }
     }
 }
