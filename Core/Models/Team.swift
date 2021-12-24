@@ -9,9 +9,9 @@ public struct Team: Codable, Identifiable {
     }
 
     public var id: Int
-    public let members: [Member]
-    public let leader: Member
-    public let name: String
+    public var members: [Member]
+    public var leader: Member
+    public var name: String
 }
 
 public extension Team {

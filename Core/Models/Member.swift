@@ -10,8 +10,8 @@ public struct Member: Codable, Identifiable {
     }
 
     public var id: Int
-    public let userId: String
-    public let displayName: String
-    public let notifications: [Date]
-    public let imageUrl: String?
+    public var userId: String
+    public var displayName: String
+    public var notifications: [Date]
+    public var imageUrl: String?
 }

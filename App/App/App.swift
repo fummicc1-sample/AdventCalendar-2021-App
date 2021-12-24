@@ -5,7 +5,7 @@ import Core
 struct MyApp: App {
     var body: some Scene {
         WindowGroup {
-            RootView().environmentObject(Store())
+            RootView().environmentObject(StoreImpl())
         }
     }
 }

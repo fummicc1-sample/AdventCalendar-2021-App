@@ -8,7 +8,7 @@ struct CalendarView: View {
     @State private var data: [Date] = []
     @State private var showAddEventPage: Bool = false
     @State private var showEventDetail: Event?
-    @EnvironmentObject var store: Store
+    @EnvironmentObject var store: StoreImpl
     
     init(year: Int) {
         self.year = year

@@ -2,7 +2,7 @@ import SwiftUI
 import Core
 
 struct TeamsView: View {
-    @EnvironmentObject var store: Store
+    @EnvironmentObject var store: StoreImpl
     
     @State private var selectedTeam: Team?
 

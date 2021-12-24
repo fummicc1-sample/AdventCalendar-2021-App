@@ -3,7 +3,7 @@ import Core
 
 struct SelectMemberView: View {
     
-    @EnvironmentObject var store: Store
+    @EnvironmentObject var store: StoreImpl
     
     var body: some View {
         NavigationView { 

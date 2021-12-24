@@ -11,11 +11,11 @@ public struct Event: Codable, Identifiable {
     }
 
     public var id: Int
-    public let name: String
-    public let startAt: Date
-    public let endAt: Date?
-    public let interested: [Member]
-    public let repeatType: Repeat?
+    public var name: String
+    public var startAt: Date
+    public var endAt: Date?
+    public var interested: [Member]
+    public var repeatType: Repeat?
 }
 
 public extension Event {

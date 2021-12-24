@@ -3,7 +3,7 @@ import Core
 
 struct RootView: View {
     
-    @EnvironmentObject var store: Store
+    @EnvironmentObject var store: StoreImpl
     @State private var selectedTag: Int = 1
     
     var body: some View {

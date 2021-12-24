@@ -4,7 +4,7 @@ import Core
 struct EventDetailView: View {
 
     @ObservedObject var viewModel: EventDetailViewModel
-    @EnvironmentObject var store: Store
+    @EnvironmentObject var store: StoreImpl
 
     var body: some View {
         VStack {
