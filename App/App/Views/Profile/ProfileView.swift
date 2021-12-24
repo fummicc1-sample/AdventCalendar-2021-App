@@ -9,46 +9,43 @@ struct ProfileView: View {
     @State private var detailEvent: Event?
 
     var body: some View {
-        NavigationView {
-            List {
-                HStack {
-                    Spacer()
-                    MemberView(
-                        isLeader: false,
-                        member: member,
-                        didTap: { _ in },
-                        length: 96
-                    )
-                    Spacer()
-                }
-                .listRowBackground(Color.clear)
-                .padding()
-                ListItemView(
-                    title: "ユーザーID",
-                    content: Text(member.userId)
+        List {
+            HStack {
+                Spacer()
+                MemberView(
+                    isLeader: false,
+                    member: member,
+                    didTap: { _ in },
+                    length: 96
                 )
-                ListItemView(
-                    title: "気になるイベント",
-                    content: Group {
-                        EventListView(
-                            events: interestedEvents,
-                            didTapEvent: { event in
-                                detailEvent = event
-                            },
-                            backgroundColor: Color.white
-                        ).shadow(radius: 1)
-                    }
-                )
-                NavigationLink("所属班") {
-                    TabView {
-                        ForEach(teams) { team in
-                            TeamDetailView(team: team)
-                        }
-                    }
-                    .tabViewStyle(PageTabViewStyle())
+                Spacer()
+            }
+            .listRowBackground(Color.clear)
+            .padding()
+            ListItemView(
+                title: "ユーザーID",
+                content: Text(member.userId)
+            )
+            ListItemView(
+                title: "気になるイベント",
+                content: Group {
+                    EventListView(
+                        events: interestedEvents,
+                        didTapEvent: { event in
+                            detailEvent = event
+                        },
+                        backgroundColor: Color.white
+                    ).shadow(radius: 1)
                 }
-            }.navigationTitle(member.displayName)
-        }
-        .navigationViewStyle(StackNavigationViewStyle.stack)
+            )
+            NavigationLink("所属班") {
+                TabView {
+                    ForEach(teams) { team in
+                        TeamDetailView(team: team)
+                    }
+                }
+                .tabViewStyle(PageTabViewStyle())
+            }
+        }.navigationTitle(member.displayName)
     }
 }

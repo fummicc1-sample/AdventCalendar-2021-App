@@ -18,7 +18,7 @@ struct RootView: View {
                         .tabItem {
                             Label("班", systemImage: "rectangle.3.group")
                         }.tag(2)
-                    ProfileView(
+                    ProfilePage(
                         member: me,
                         teams: store.myTeams,
                         interestedEvents: store.myEvents

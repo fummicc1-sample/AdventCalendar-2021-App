@@ -16,9 +16,24 @@ struct EventDetailView: View {
                 }
             }
             .padding()
+            Text("興味ありメンバー")
+            LazyHGrid(rows: [GridItem(.fixed(90))], content: {
+                ForEach(viewModel.event.interested) { member in
+                    MemberView(
+                        isLeader: false,
+                        member: member,
+                        didTap: { member in
+                            viewModel.showDetailMember = member
+                        },
+                        length: 40
+                    )
+                }
+            })
             Button {
+                viewModel.didTapInterestButton()
             } label: {
-                Text("参加する")
+                let message = viewModel.isJoining ? "参加を取り消す" : "参加する"
+                Text(message)
                     .foregroundColor(Color.white)
                     .bold()
             }
@@ -26,17 +41,24 @@ struct EventDetailView: View {
             .padding(.horizontal, 48)
             .background(Color.accentColor)
             .cornerRadius(8)
-
         }
         .navigationTitle(viewModel.event.name)
         .toolbar {
             Button {
-
+                viewModel
             } label: {
-
-                Image(systemName: "bell")
+                let imageName = viewModel.isNotificationEnabled ? "bell.fill" : "bell"
+                Image(systemName: imageName)
             }
-
         }
+        .sheet(item: $viewModel.showDetailMember) {
+        } content: { member in
+            ProfileView(
+                member: member,
+                teams: [],
+                interestedEvents: []
+            )
+        }
+
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D306FEA2277550990093C452 /* ProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306FEA1277550990093C452 /* ProfilePage.swift */; };
 		D328AF3627747EFA00FE132F /* AddEventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D328AF3527747EFA00FE132F /* AddEventViewModel.swift */; };
 		D328AF382774914E00FE132F /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D328AF372774914E00FE132F /* EventDetailView.swift */; };
 		D328AF3A2774917900FE132F /* EventDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D328AF392774917900FE132F /* EventDetailViewModel.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D306FEA1277550990093C452 /* ProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePage.swift; sourceTree = "<group>"; };
 		D328AF3527747EFA00FE132F /* AddEventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventViewModel.swift; sourceTree = "<group>"; };
 		D328AF372774914E00FE132F /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
 		D328AF392774917900FE132F /* EventDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailViewModel.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				D3A02586277434AE004D6704 /* ProfileView.swift */,
+				D306FEA1277550990093C452 /* ProfilePage.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 				D3A0257F2774318B004D6704 /* TeamsView.swift in Sources */,
 				D3A025802774318B004D6704 /* TeamDetailView.swift in Sources */,
 				D3A025812774318B004D6704 /* MemberView.swift in Sources */,
+				D306FEA2277550990093C452 /* ProfilePage.swift in Sources */,
 				D328AF3C2774990C00FE132F /* EventListView.swift in Sources */,
 				D3A025822774318B004D6704 /* RootModel.swift in Sources */,
 				D3A02587277434AE004D6704 /* ProfileView.swift in Sources */,
