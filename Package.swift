@@ -12,7 +12,8 @@ let package = Package(
         .iOS(.v15)
     ],
     products: [
-        .library(name: "Core", targets: ["Core"])
+        .library(name: "Core", targets: ["Core"]),
+        .library(name: "Youtube", targets: ["Youtube"])
     ],
     dependencies: [
         .package(
@@ -43,7 +44,8 @@ let package = Package(
         .target(
             name: "Youtube",
             dependencies: [
-                .product(name: "YouTubeiOSPlayerHelper", package: "YouTubeiOSPlayerHelper")
+                .product(name: "YouTubeiOSPlayerHelper", package: "YouTubeiOSPlayerHelper"),
+                .target(name: "Core")
             ],
             path: "Youtube"
         ),
