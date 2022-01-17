@@ -14,7 +14,38 @@ let package = Package(
     products: [
         .library(name: "Core", targets: ["Core"])
     ],
+    dependencies: [
+        .package(
+            name: "Firebase",
+            url: "https://github.com/firebase/firebase-ios-sdk",
+            from: Version(8, 10, 0)
+        ),
+        .package(
+            name: "EasyFirebaseSwift",
+            url: "https://github.com/fummicc1/EasyFirebaseSwift",
+            from: Version(2, 1, 0)
+        ),
+        .package(
+            name: "YouTubeiOSPlayerHelper",
+            url: "https://github.com/youtube/youtube-ios-player-helper",
+            from: Version(1, 0, 4)
+        )
+    ],
     targets: [
-        .target(name: "Core", path: "Core")
+        .target(
+            name: "Core",
+            dependencies: [
+                .product(name: "FirebaseAuth", package: "Firebase"),
+                .product(name: "EasyFirebaseSwift", package: "EasyFirebaseSwift")
+            ],
+            path: "Core"
+        ),
+        .target(
+            name: "Youtube",
+            dependencies: [
+                .product(name: "YouTubeiOSPlayerHelper", package: "YouTubeiOSPlayerHelper")
+            ],
+            path: "Youtube"
+        ),
     ]
 )
