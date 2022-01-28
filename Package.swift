@@ -30,6 +30,11 @@ let package = Package(
             name: "YouTubeiOSPlayerHelper",
             url: "https://github.com/youtube/youtube-ios-player-helper",
             from: Version(1, 0, 4)
+        ),
+        .package(
+            name: "Moya",
+            url: "https://github.com/Moya/Moya",
+            from: Version(15, 0, 0)
         )
     ],
     targets: [
@@ -45,7 +50,8 @@ let package = Package(
             name: "Youtube",
             dependencies: [
                 .product(name: "YouTubeiOSPlayerHelper", package: "YouTubeiOSPlayerHelper"),
-                .target(name: "Core")
+                .target(name: "Core"),
+                .product(name: "Moya", package: "Moya")
             ],
             path: "Youtube"
         ),

@@ -1,7 +1,5 @@
 import Foundation
 
-
-
 public struct Video: Codable {
     public let id: String
 

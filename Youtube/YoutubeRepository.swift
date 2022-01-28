@@ -1,8 +1,8 @@
-//
-//  File.swift
-//  
-//
-//  Created by Fumiya Tanaka on 2022/01/18.
-//
-
 import Foundation
+
+public protocol YoutubeRepository {
+
+}
+
+public actor YoutubeRepositoryImpl: YoutubeRepository {
+}
