@@ -35,7 +35,7 @@ extension KcsChannelService: TargetType {
 
     public var task: Task {
         var parameters: [String: Any] = [
-            "key": youtubeApiKey
+            "key": Constants.youtubeApiKey
         ]
         switch self {
         case .getChannelInfo:
