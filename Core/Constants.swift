@@ -2,8 +2,13 @@ import SwiftUI
 import Foundation
 
 public enum Constants {
+
+    // MARK: Internal
+    static let youtubeApiKey: String = ""
+
+    // MARK: Public
     static public let homepage = "https://kcs1959.jp"
-    
+
     static public let decoder: JSONDecoder = {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .custom({ (decoder) -> Date in
