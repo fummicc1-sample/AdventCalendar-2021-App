@@ -24,6 +24,11 @@ let package = Package(
             name: "EasyFirebaseSwift",
             url: "https://github.com/fummicc1/EasyFirebaseSwift",
             from: Version(2, 1, 0)
+        ),
+        .package(
+            name: "Moya",
+            url: "https://github.com/Moya/Moya",
+            from: Version(15, 0, 0)
         )
     ],
     targets: [
@@ -31,7 +36,9 @@ let package = Package(
             name: "Core",
             dependencies: [
                 .product(name: "FirebaseAuth", package: "Firebase"),
-                .product(name: "EasyFirebaseSwift", package: "EasyFirebaseSwift")
+                .product(name: "EasyFirebaseSwift", package: "EasyFirebaseSwift"),
+                .product(name: "Moya", package: "Moya"),
+                .product(name: "CombineMoya", package: "Moya")
             ],
             path: "Core"
         )
