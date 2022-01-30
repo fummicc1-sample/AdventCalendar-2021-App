@@ -4,7 +4,7 @@ import Foundation
 public enum Constants {
 
     // MARK: Internal
-    static let youtubeApiKey: String = ""
+    static let youtubeApiKey: String = ProcessInfo.processInfo.environment["youtube_api_key"] ?? ""
 
     // MARK: Public
     static public let homepage = "https://kcs1959.jp"
