@@ -1,10 +1,10 @@
 import Foundation
 
-public struct PlaylistId {
+public struct PlaylistId: ExpressibleByStringLiteral {
     public let rawValue: String
 
-    public init(id: String) {
-        self.rawValue = id
+    public init(stringLiteral value: String) {
+        self.rawValue = value
     }
 }
 
