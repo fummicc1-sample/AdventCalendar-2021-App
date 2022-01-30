@@ -12,8 +12,7 @@ let package = Package(
         .iOS(.v15)
     ],
     products: [
-        .library(name: "Core", targets: ["Core"]),
-        .library(name: "Youtube", targets: ["Youtube"])
+        .library(name: "Core", targets: ["Core"])
     ],
     dependencies: [
         .package(
@@ -25,11 +24,6 @@ let package = Package(
             name: "EasyFirebaseSwift",
             url: "https://github.com/fummicc1/EasyFirebaseSwift",
             from: Version(2, 1, 0)
-        ),
-        .package(
-            name: "YouTubeiOSPlayerHelper",
-            url: "https://github.com/youtube/youtube-ios-player-helper",
-            from: Version(1, 0, 4)
         )
     ],
     targets: [
@@ -40,14 +34,6 @@ let package = Package(
                 .product(name: "EasyFirebaseSwift", package: "EasyFirebaseSwift")
             ],
             path: "Core"
-        ),
-        .target(
-            name: "Youtube",
-            dependencies: [
-                .product(name: "YouTubeiOSPlayerHelper", package: "YouTubeiOSPlayerHelper"),
-                .target(name: "Core")
-            ],
-            path: "Youtube"
-        ),
+        )
     ]
 )
