@@ -6,6 +6,10 @@ public struct ChannelId: ExpressibleByStringLiteral {
     public init(stringLiteral value: String) {
         self.value = value
     }
+
+    public init(_ value: String) {
+        self.value = value
+    }
 }
 
 public struct Channel {
