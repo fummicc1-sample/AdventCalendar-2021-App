@@ -1,10 +1,10 @@
 import Foundation
 
 public struct ChannelId: ExpressibleByStringLiteral {
-    public let rawValue: String
+    public let value: String
 
     public init(stringLiteral value: String) {
-        self.rawValue = value
+        self.value = value
     }
 }
 
