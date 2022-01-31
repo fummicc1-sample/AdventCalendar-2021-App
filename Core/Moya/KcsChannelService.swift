@@ -10,7 +10,7 @@ public enum KcsChannelService {
 
 extension KcsChannelService: TargetType {
     public var baseURL: URL {
-        return URL(string: "https://www.googleapis.com/youtube/v3/")!
+        return URL(string: "https://www.googleapis.com/youtube/v3")!
     }
 
     public var path: String {
