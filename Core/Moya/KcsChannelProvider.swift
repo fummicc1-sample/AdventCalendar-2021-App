@@ -7,6 +7,8 @@ public class KcsChannelProvider {
 
     private let provider: MoyaProvider<KcsChannelService> = MoyaProvider()
 
+    public init() {}
+
     public func request(_ targetType: KcsChannelService) -> AnyPublisher<Data, Error> {
         provider
             .requestPublisher(targetType, callbackQueue: .global())
