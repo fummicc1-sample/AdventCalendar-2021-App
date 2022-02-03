@@ -7,12 +7,13 @@
 import PackageDescription
 
 let package = Package(
-    name: "Core",
+    name: "KCS",
     platforms: [
         .iOS(.v15)
     ],
     products: [
-        .library(name: "Core", targets: ["Core"])
+        .library(name: "Core", targets: ["Core"]),
+        .library(name: "Youtube", targets: ["Youtube"])
     ],
     dependencies: [
         .package(
@@ -29,6 +30,11 @@ let package = Package(
             name: "Moya",
             url: "https://github.com/Moya/Moya",
             from: Version(15, 0, 0)
+        ),
+        .package(
+            name: "YouTubeiOSPlayerHelper",
+            url: "https://github.com/youtube/youtube-ios-player-helper",
+            from: Version(1, 0, 4)
         )
     ],
     targets: [
@@ -41,6 +47,17 @@ let package = Package(
                 .product(name: "CombineMoya", package: "Moya")
             ],
             path: "Core"
+        ),
+        .target(
+            name: "Youtube",
+            dependencies: [
+                .product(
+                    name: "YouTubeiOSPlayerHelper",
+                    package: "YouTubeiOSPlayerHelper"
+                ),
+                .target(name: "Core")
+            ],
+            path: "Youtube"
         )
     ]
 )

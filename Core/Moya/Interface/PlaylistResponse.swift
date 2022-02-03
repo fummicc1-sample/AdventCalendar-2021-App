@@ -16,6 +16,7 @@ public extension PlaylistResponse {
         public let description: String
         public let publishedAt: Date
         public let thumbnails: Thumbnails
+        public let channelTitle: String
     }
 
     struct Thumbnails: Codable {
