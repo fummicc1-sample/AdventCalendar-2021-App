@@ -14,6 +14,7 @@ public extension PlaylistResponse {
         public let channelId: String
         public let title: String
         public let description: String
+        public let publishedAt: Date
         public let thumbnails: Thumbnails
     }
 
