@@ -14,10 +14,8 @@ public struct PlaylistId: ExpressibleByStringLiteral, Hashable {
 
 public struct Playlist: Identifiable {
     public var id: PlaylistId
-    public var videos: [VideoId]
 
-    public init(id: PlaylistId, videos: [VideoId] = []) {
+    public init(id: PlaylistId) {
         self.id = id
-        self.videos = videos
     }
 }
