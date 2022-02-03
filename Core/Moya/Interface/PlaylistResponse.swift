@@ -7,6 +7,7 @@ public struct PlaylistResponse: Codable {
 public extension PlaylistResponse {
     struct Item: Codable {
         public let id: String
+        public let snippet: Snippet
     }
 
     struct Snippet: Codable {
