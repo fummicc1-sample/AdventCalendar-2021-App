@@ -19,7 +19,7 @@ public struct AnimatableTap<Content: View>: View {
                 gesture = true
             }
         content
-            .scaleEffect(isTap ? 1.1 : 1)
+            .scaleEffect(isHover ? 1.1 : 1)
             .simultaneousGesture(dragGesture)
             .onTapGesture {
                 withAnimation(.spring(response: 0.4, dampingFraction: 0.6)) {
