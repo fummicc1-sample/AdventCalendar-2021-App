@@ -3,8 +3,11 @@ import Core
 
 public struct VideoItemView: View {
 
+    @Namespace var namespace
+
     public init(
         alignment: Alignment = .center,
+        id: VideoId,
         title: String,
         thumbnail: URL,
         avatar: URL,
@@ -13,6 +16,7 @@ public struct VideoItemView: View {
         viewCount: Int? = nil
     ) {
         self.alignment = alignment
+        self.videoId = id
         self.title = title
         self.thumbnail = thumbnail
         self.avatar = avatar
@@ -23,6 +27,7 @@ public struct VideoItemView: View {
 
     public let alignment: Alignment
 
+    public let videoId: VideoId
     public let title: String
     public let thumbnail: URL
     public let avatar: URL
@@ -45,6 +50,7 @@ public struct VideoItemView: View {
                 }
             )
                 .frame(height: 160)
+                .matchedGeometryEffect(id: videoId, in: namespace)
             Spacer()
                 .frame(height: 4)
             HStack {
@@ -86,6 +92,7 @@ public struct VideoItemView: View {
 struct VideoItemView_Previews: PreviewProvider {
     static var previews: some View {
         VideoItemView(
+            id: "",
             title: "",
             thumbnail: URL(string: "fummicc1.dev")!,
             avatar: URL(string: "fummicc1.dev")!,
