@@ -1,7 +1,7 @@
 import SwiftUI
 import Core
 
-public struct VideoListItemView: View {
+public struct VideoItemView: View {
 
     public init(
         alignment: Alignment = .center,
@@ -85,7 +85,7 @@ public struct VideoListItemView: View {
 
 struct VideoListItemView_Previews: PreviewProvider {
     static var previews: some View {
-        VideoListItemView(
+        VideoItemView(
             title: "",
             thumbnail: URL(string: "fummicc1.dev")!,
             avatar: URL(string: "fummicc1.dev")!,

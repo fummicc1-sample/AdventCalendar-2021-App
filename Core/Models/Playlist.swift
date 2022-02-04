@@ -17,6 +17,8 @@ public struct Playlist: Identifiable {
     public var title: String
     public var thumbnail: URL
     public var description: String
+    public var publishedAt: String
+    public var channelTitle: String
     public var videos: [Video]
 
     public init(
@@ -24,12 +26,16 @@ public struct Playlist: Identifiable {
         title: String,
         thumbnail: URL,
         description: String,
+        publishedAt: String,
+        channelTitle: String,
         videos: [Video] = []
     ) {
         self.id = id
         self.title = title
         self.thumbnail = thumbnail
         self.description = description
+        self.publishedAt = publishedAt
+        self.channelTitle = channelTitle
         self.videos = videos
     }
 }
