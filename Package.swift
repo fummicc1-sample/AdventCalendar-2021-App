@@ -13,7 +13,8 @@ let package = Package(
     ],
     products: [
         .library(name: "Core", targets: ["Core"]),
-        .library(name: "Youtube", targets: ["Youtube"])
+        .library(name: "Youtube", targets: ["Youtube"]),
+        .library(name: "Design", targets: ["Design"])
     ],
     dependencies: [
         .package(
@@ -47,6 +48,10 @@ let package = Package(
                 .product(name: "CombineMoya", package: "Moya")
             ],
             path: "Core"
+        ),
+        .target(
+            name: "Design",
+            path: "Design"
         ),
         .target(
             name: "Youtube",
