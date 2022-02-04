@@ -14,7 +14,7 @@ public struct AnimatableTap<Content: View>: View {
     @State private var isTap: Bool = false
 
     public var body: some View {
-        let dragGesture = DragGesture(minimumDistance: 0)
+        let dragGesture = DragGesture(minimumDistance: 0, coordinateSpace: .local)
             .updating($isHover) { _, gesture, _ in
                 gesture = true
             }
