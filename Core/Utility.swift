@@ -28,12 +28,17 @@ public extension View {
         ) { EmptyView() }
     }
     
-    func navigatePush<H: Hashable>(when binding: Binding<H?>,
-                                   matches: H) -> some View {
+    func navigatePush<H: Hashable>(whenNotNil binding: Binding<H?>) -> some View {
         NavigationLink(
             destination: self,
-            tag: matches,
-            selection: binding
+            isActive: Binding<Bool>(
+                get: {
+                    binding.wrappedValue != nil
+                }, set: { isNil, _ in
+                    if isNil {
+                        binding.wrappedValue = nil
+                    }
+                })
         ) { EmptyView() }
     }
 }
