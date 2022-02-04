@@ -81,7 +81,7 @@ public actor StoreImpl: ObservableObject {
     }
 
     private func fetchMembers() -> [Member] {
-        let decoder = Constants.decoder
+        let decoder = Constants.decoder(convertToSnakeCase: true)
         guard let raw = database.string(forKey: "members"),
               let data = raw.data(using: .utf8),
               let members = try? decoder.decode([Member].self, from: data) else {
@@ -91,7 +91,7 @@ public actor StoreImpl: ObservableObject {
     }
     
     private func fetchTeams() -> [Team] {
-        let decoder = Constants.decoder
+        let decoder = Constants.decoder(convertToSnakeCase: true)
         guard let raw = database.string(forKey: "teams"),
               let data = raw.data(using: .utf8),
               let teams = try? decoder.decode([Team].self, from: data) else {
@@ -101,7 +101,7 @@ public actor StoreImpl: ObservableObject {
     }
     
     private func fetchEvents() -> [Event] {
-        let decoder = Constants.decoder
+        let decoder = Constants.decoder(convertToSnakeCase: true)
         guard let raw = database.string(forKey: "events"),
               let data = raw.data(using: .utf8),
               let events = try? decoder.decode([Event].self, from: data) else {
@@ -111,7 +111,8 @@ public actor StoreImpl: ObservableObject {
     }
     
     private func save<Value: Encodable>(key: String, value: Value) {
-        guard let data = try? Constants.encoder.encode(value) else {
+        guard let data = try? Constants
+                .encoder(convertToSnakeCase: true).encode(value) else {
             return
         }
         let text = String(data: data, encoding: .utf8)

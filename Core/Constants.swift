@@ -9,18 +9,20 @@ public enum Constants {
     // MARK: Public
     static public let homepage = "https://kcs1959.jp"
 
-    static public let decoder: JSONDecoder = {
+    static public func decoder(convertToSnakeCase: Bool = false) -> JSONDecoder {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .custom({ (decoder) -> Date in
             let data = try! decoder.singleValueContainer().decode(String.self)
             let formatter = ISO8601DateFormatter()
             return formatter.date(from: data)!
         })
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        if convertToSnakeCase {
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+        }
         return decoder
-    }()
+    }
     
-    static public let encoder: JSONEncoder = {
+    static public func encoder(convertToSnakeCase: Bool = false) -> JSONEncoder {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .custom({ (date, encoder) in
             let formatter = ISO8601DateFormatter()
@@ -28,9 +30,11 @@ public enum Constants {
             var container = encoder.singleValueContainer()
             try container.encode(stringData)
         })
-        encoder.keyEncodingStrategy = .convertToSnakeCase
+        if convertToSnakeCase {
+            encoder.keyEncodingStrategy = .convertToSnakeCase
+        }
         return encoder
-    }()
+    }
     
     private static let membersRawData = """
 [
@@ -206,19 +210,19 @@ public enum Constants {
     
     static public let defaultMembers: [Member] = {
         let data = membersRawData.data(using: .utf8)!
-        let members = try! decoder.decode([Member].self, from: data)
+        let members = try! decoder(convertToSnakeCase: true).decode([Member].self, from: data)
         return members
     }()
     
     static public let defaultTeams: [Team] = {
         let data = teamsRawData.data(using: .utf8)!
-        let teams = try! decoder.decode([Team].self, from: data)
+        let teams = try! decoder(convertToSnakeCase: true).decode([Team].self, from: data)
         return teams
     }()
     
     static public let defaultEvents: [Event] = {
         let data = eventsRawData.data(using: .utf8)!
-        let events = try! decoder.decode([Event].self, from: data)
+        let events = try! decoder(convertToSnakeCase: true).decode([Event].self, from: data)
         return events
     }()
 }
