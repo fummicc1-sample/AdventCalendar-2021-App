@@ -10,23 +10,20 @@ public struct AnimatableTap<Content: View>: View {
     public let onPressed: () -> Void
     public let content: Content
 
-    @State private var isHover: Bool = false
-    @State private var isTap: Bool = false
+    @GestureState private var isHover: Bool = false
+    @GestureState private var isTap: Bool = false
 
     public var body: some View {
+        let dragGesture = DragGesture(minimumDistance: 0)
+            .updating($isHover) { current, gesture, transaction in
+                gesture = current
+            }
         content
             .scaleEffect(isTap ? 1.1 : 1)
-            .onHover(perform: { onHover in
-                withAnimation(.easeInOut) {
-                    isHover = onHover
-                }
-            })
+            .gesture(dragGesture)
             .onTapGesture {
                 withAnimation(.spring(response: 0.4, dampingFraction: 0.6)) {
-                    isTap = true
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                        isTap = false
-                    }
+                    isTap = true                    
                 }
             }
     }
