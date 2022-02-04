@@ -13,9 +13,17 @@ public struct ChannelId: ExpressibleByStringLiteral, Hashable {
 }
 
 public struct Channel: Identifiable, Hashable {
-    public init(id: ChannelId) {
+    public init(
+        id: ChannelId,
+        name: String,
+        thumbnail: URL
+    ) {
         self.id = id
+        self.name = name
+        self.thumbnail = thumbnail
     }
 
     public var id: ChannelId
+    public var name: String
+    public var thumbnail: URL
 }
