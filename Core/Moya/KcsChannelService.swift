@@ -50,10 +50,10 @@ extension KcsChannelService: TargetType {
             parameters["playlistId"] = playlistId
         case .getVideos(let videos):
             let ids = videos.joined(separator: ",")
-            parameters["part"] = "id,snippet"
+            parameters["part"] = "id,snippet,contentDetails"
             parameters["id"] = ids
         case .getVideo(let videoId):
-            parameters["part"] = "id,snippet"
+            parameters["part"] = "id,snippet,contentDetails"
             parameters["id"] = videoId
         }
         return Task.requestParameters(

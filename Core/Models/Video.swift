@@ -20,6 +20,7 @@ public struct Video: Identifiable, Hashable {
     public let thumbnail: URL
     public let channelId: ChannelId
     public let channelTitle: String
+    public let duration: String
 
     public init(
         id: VideoId,
@@ -28,7 +29,8 @@ public struct Video: Identifiable, Hashable {
         publishedAt: String,
         thumbnail: URL,
         channelId: ChannelId,
-        channelTitle: String
+        channelTitle: String,
+        duration: String
     ) {
         self.id = id
         self.title = title
@@ -37,5 +39,6 @@ public struct Video: Identifiable, Hashable {
         self.thumbnail = thumbnail
         self.channelId = channelId
         self.channelTitle = channelTitle
+        self.duration = duration
     }
 }
