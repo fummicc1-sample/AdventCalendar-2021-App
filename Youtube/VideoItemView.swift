@@ -83,7 +83,7 @@ public struct VideoItemView: View {
     }
 }
 
-struct VideoListItemView_Previews: PreviewProvider {
+struct VideoItemView_Previews: PreviewProvider {
     static var previews: some View {
         VideoItemView(
             title: "",

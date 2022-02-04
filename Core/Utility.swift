@@ -34,8 +34,8 @@ public extension View {
             isActive: Binding<Bool>(
                 get: {
                     binding.wrappedValue != nil
-                }, set: { isNil, _ in
-                    if isNil {
+                }, set: { isNotNil, _ in
+                    if !isNotNil {
                         binding.wrappedValue = nil
                     }
                 })
