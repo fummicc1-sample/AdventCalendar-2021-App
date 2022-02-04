@@ -11,19 +11,19 @@ public struct AnimatableTap<Content: View>: View {
     public let content: Content
 
     @GestureState private var isHover: Bool = false
-    @GestureState private var isTap: Bool = false
+    @State private var isTap: Bool = false
 
     public var body: some View {
         let dragGesture = DragGesture(minimumDistance: 0)
-            .updating($isHover) { current, gesture, transaction in
-                gesture = current
+            .updating($isHover) { _, gesture, _ in
+                gesture = true
             }
         content
             .scaleEffect(isTap ? 1.1 : 1)
             .gesture(dragGesture)
             .onTapGesture {
                 withAnimation(.spring(response: 0.4, dampingFraction: 0.6)) {
-                    isTap = true                    
+                    isTap = true
                 }
             }
     }
