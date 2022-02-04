@@ -15,14 +15,14 @@ public struct PlaylistId: ExpressibleByStringLiteral, Hashable {
 public struct Playlist: Identifiable {
     public var id: PlaylistId
     public var title: String
-    public var thumbnail: String
+    public var thumbnail: URL
     public var description: String
     public var videos: [Video]
 
     public init(
         id: PlaylistId,
         title: String,
-        thumbnail: String,
+        thumbnail: URL,
         description: String,
         videos: [Video] = []
     ) {
