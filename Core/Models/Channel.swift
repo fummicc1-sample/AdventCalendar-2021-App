@@ -1,6 +1,6 @@
 import Foundation
 
-public struct ChannelId: ExpressibleByStringLiteral {
+public struct ChannelId: ExpressibleByStringLiteral, Hashable {
     public let value: String
 
     public init(stringLiteral value: String) {
@@ -12,7 +12,7 @@ public struct ChannelId: ExpressibleByStringLiteral {
     }
 }
 
-public struct Channel {
+public struct Channel: Identifiable, Hashable {
     public init(id: ChannelId) {
         self.id = id
     }

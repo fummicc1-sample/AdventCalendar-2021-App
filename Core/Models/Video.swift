@@ -12,7 +12,7 @@ public struct VideoId: ExpressibleByStringLiteral, Hashable {
     }
 }
 
-public struct Video: Identifiable {
+public struct Video: Identifiable, Hashable {
     public let id: VideoId
     public let title: String
     public let description: String

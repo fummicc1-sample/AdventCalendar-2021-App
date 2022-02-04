@@ -12,7 +12,7 @@ public struct PlaylistId: ExpressibleByStringLiteral, Hashable {
     }
 }
 
-public struct Playlist: Identifiable {
+public struct Playlist: Identifiable, Hashable {
     public var id: PlaylistId
     public var title: String
     public var thumbnail: URL
