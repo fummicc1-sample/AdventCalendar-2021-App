@@ -10,6 +10,11 @@ public enum YoutubeView {
         @Binding public var video: Core.Video
         @Binding public var action: Action?
 
+        public init(video: Binding<Core.Video>, action: Binding<Action?>) {
+            self._video = video
+            self._action = action
+        }
+
         public func makeUIView(context: Context) -> YTPlayerView {
             let view = YTPlayerView()
             let ok = view.load(withVideoId: video.id.value)
