@@ -15,7 +15,7 @@ public extension PlaylistItemsResponse {
         public let channelId: String
         public let title: String
         public let description: String
-        public let thubmnails: Thumbnails
+        public let thumbnails: Thumbnails
         public let channelTitle: String
         public let playlistId: String
         public let position: Int
