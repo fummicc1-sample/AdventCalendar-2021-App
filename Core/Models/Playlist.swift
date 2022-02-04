@@ -17,16 +17,19 @@ public struct Playlist: Identifiable {
     public var title: String
     public var thumbnail: String
     public var description: String
+    public var videos: [Video]
 
     public init(
         id: PlaylistId,
         title: String,
         thumbnail: String,
-        description: String
+        description: String,
+        videos: [Video] = []
     ) {
         self.id = id
         self.title = title
         self.thumbnail = thumbnail
         self.description = description
+        self.videos = videos
     }
 }
