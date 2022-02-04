@@ -44,8 +44,9 @@ extension KcsChannelService: TargetType {
         case .getPlaylists(let channelId):
             parameters["part"] = "id,snippet,status"
             parameters["channelId"] = channelId
-        case .getPlaylistItems:
-            break
+        case .getPlaylistItems(let playlistId):
+            parameters["part"] = "id,snippet"
+            parameters["playlistId"] = playlistId
         case .getVideo:
             break
         }
