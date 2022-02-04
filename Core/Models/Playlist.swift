@@ -19,7 +19,6 @@ public struct Playlist: Identifiable {
     public var description: String
     public var publishedAt: String
     public var channelTitle: String
-    public var videos: [Video]
 
     public init(
         id: PlaylistId,
@@ -27,8 +26,7 @@ public struct Playlist: Identifiable {
         thumbnail: URL,
         description: String,
         publishedAt: String,
-        channelTitle: String,
-        videos: [Video] = []
+        channelTitle: String
     ) {
         self.id = id
         self.title = title
@@ -36,6 +34,5 @@ public struct Playlist: Identifiable {
         self.description = description
         self.publishedAt = publishedAt
         self.channelTitle = channelTitle
-        self.videos = videos
     }
 }
