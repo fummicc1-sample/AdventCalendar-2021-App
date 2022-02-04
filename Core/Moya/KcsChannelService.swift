@@ -5,6 +5,7 @@ public enum KcsChannelService {
     case getChannelInfo
     case getPlaylists(String)
     case getPlaylistItems(String)
+    case getVideos([String])
     case getVideo(String)
 }
 
@@ -21,14 +22,14 @@ extension KcsChannelService: TargetType {
             return "/playlists"
         case .getPlaylistItems:
             return "/playlistItems"
-        case .getVideo:
+        case .getVideo, .getVideos:
             return "/videos"
         }
     }
 
     public var method: Moya.Method {
         switch self {
-        case .getChannelInfo, .getPlaylistItems, .getPlaylists, .getVideo:
+        case .getChannelInfo, .getPlaylistItems, .getPlaylists, .getVideos, .getVideo:
             return .get
         }
     }
@@ -47,8 +48,13 @@ extension KcsChannelService: TargetType {
         case .getPlaylistItems(let playlistId):
             parameters["part"] = "id,snippet"
             parameters["playlistId"] = playlistId
-        case .getVideo:
-            break
+        case .getVideos(let videos):
+            let ids = videos.joined(separator: ",")
+            parameters["part"] = "id,snippet"
+            parameters["id"] = ids
+        case .getVideo(let videoId):
+            parameters["part"] = "id,snippet"
+            parameters["id"] = videoId
         }
         return Task.requestParameters(
             parameters: parameters,
