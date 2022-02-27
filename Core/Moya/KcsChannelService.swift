@@ -38,6 +38,9 @@ extension KcsChannelService: TargetType {
         var parameters: [String: Any] = [
             "key": Constants.youtubeApiKey
         ]
+        if method == .get {
+            parameters["maxResults"] = 30
+        }
         switch self {
         case .getChannelInfo:
             parameters["forUsername"] = "kcs1959"
