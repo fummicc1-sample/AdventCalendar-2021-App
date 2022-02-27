@@ -4,7 +4,6 @@ import Core
 public struct VideoItemView: View {
 
     public init(
-        namespace: Namespace.ID,
         alignment: Alignment = .center,
         id: VideoId,
         title: String,
@@ -14,7 +13,6 @@ public struct VideoItemView: View {
         publishedAt: String,
         viewCount: Int? = nil
     ) {
-        self.namespace = namespace
         self.alignment = alignment
         self.videoId = id
         self.title = title
@@ -25,7 +23,6 @@ public struct VideoItemView: View {
         self.viewCount = viewCount
     }
 
-    public var namespace: Namespace.ID
     public let alignment: Alignment
 
     public let videoId: VideoId
@@ -50,10 +47,7 @@ public struct VideoItemView: View {
                     }
                 }
             )
-                .matchedGeometryEffect(id: videoId, in: namespace)
                 .frame(height: 160)
-                .animation(.easeInOut, value: videoId)
-                .scaleEffect()
             Spacer()
                 .frame(height: 4)
             HStack {
