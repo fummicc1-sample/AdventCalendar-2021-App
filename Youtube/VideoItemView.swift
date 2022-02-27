@@ -50,8 +50,10 @@ public struct VideoItemView: View {
                     }
                 }
             )
-                .frame(height: 160)
                 .matchedGeometryEffect(id: videoId, in: namespace)
+                .frame(height: 160)
+                .animation(.easeInOut, value: videoId)
+                .scaleEffect()
             Spacer()
                 .frame(height: 4)
             HStack {
